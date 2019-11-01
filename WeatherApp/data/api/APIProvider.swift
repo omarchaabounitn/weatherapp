@@ -10,6 +10,11 @@ import Foundation
 import Network
 import RxSwift
 
+enum APIError: Error {
+    case serverError(String?)
+    case dataNotFormmated
+}
+
 class APIProvider: NSObject {
     
     enum HTTPMethod: String {

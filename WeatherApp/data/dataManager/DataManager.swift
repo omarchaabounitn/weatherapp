@@ -14,15 +14,22 @@ class DataManager {
     
     static let shared = DataManager()
     
-    func getProvisions(_ latitude: Double, longitude: Double) -> Single<Data> {
+    func getProvisions(_ latitude: Double, _ longitude: Double) -> Single<[Weather]> {
         return APIProvider.shared.path(Constant.apiURL.rawValue)
             .params(["_ll": "\(longitude),\(latitude)",
                      "_auth": Constant.apiAuth.rawValue,
                      "_c": Constant.apiKey.rawValue])
             .method(.get)
             .requestData()
-            .map({ data -> Data in
-                return data
+            .map({ data -> [Weather] in
+                let response = try JSONDecoder().decode(WeatherResponse.self, from: data)
+                guard response.status == 200 else {
+                    throw APIError.serverError(response.message)
+                }
+                if response.weatherList.isEmpty {
+                    throw APIError.dataNotFormmated
+                }
+                return response.weatherList
             })
     }
 }
