@@ -5,6 +5,7 @@ target 'WeatherApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'RxSwift', '5.0.0'
+  pod 'RxCoreLocation', '~> 1.4'
 
   # Pods for WeatherApp
 
