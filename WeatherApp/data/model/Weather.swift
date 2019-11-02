@@ -11,10 +11,12 @@ import Foundation
 class Weather: Decodable {
     var temperature: Double?
     var pression: Int?
-    var pluie: Double?
+    var pluie: RainLevel?
     var humidite: Double?
     var avgWind: Double?
-    var windDirection: Int?
+    var windDirection: WindDirection?
+    var cloudCoverage: Int?
+    var date: Date!
     
     private enum CodingKeys: String, CodingKey {
         case temperature = "temperature"
@@ -26,6 +28,8 @@ class Weather: Decodable {
         case avgWind = "vent_moyen"
         case tenM = "10m"
         case windDirection = "vent_direction"
+        case cloudCovrage = "nebulosite"
+        case cloudCovrageKey = "totale"
     }
     
     required init(from decoder: Decoder) throws {
@@ -36,7 +40,7 @@ class Weather: Decodable {
         if let pressionContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: CodingKeys.pression) {
             self.pression = try pressionContainer.decode(Int.self, forKey: .pressionSeaLevel)
         }
-        pluie = try? container.decode(Double.self, forKey: .pluie)
+        pluie = RainLevel(rawValue: try container.decode(Double.self, forKey: .pluie))
         if let humidityContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: CodingKeys.humidite) {
             self.humidite = try humidityContainer.decode(Double.self, forKey: .twoM)
         }
@@ -44,7 +48,47 @@ class Weather: Decodable {
             self.avgWind = try windContainer.decode(Double.self, forKey: .tenM)
         }
         if let windDirectionContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: CodingKeys.windDirection) {
-            self.windDirection = try windDirectionContainer.decode(Int.self, forKey: .tenM)
+            self.windDirection = WindDirection(rawValue: try windDirectionContainer.decode(Int.self, forKey: .tenM))
+        }
+        if let cloudContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: CodingKeys.cloudCovrage) {
+            self.cloudCoverage = try cloudContainer.decode(Int.self, forKey: .cloudCovrageKey)
+        }
+    }
+}
+
+enum RainLevel: Double {
+    case clear = 0.0
+    case littleRainy = 0.5
+    case rainy = 1.0
+
+    init(rawValue: Double) {
+        switch rawValue {
+        case 0:
+            self = .clear
+        case _ where rawValue <= 0.5:
+            self = .littleRainy
+        default:
+            self = .rainy
+        }
+    }
+}
+
+enum WindDirection: Int {
+    case north = 0
+    case east = 90
+    case south = 180
+    case west = 260
+    
+    init(rawValue: Int) {
+        switch rawValue {
+        case _ where rawValue >= 0 && rawValue < 90:
+            self = .north
+        case _ where rawValue >= 90 && rawValue < 180:
+            self = .east
+        case _ where rawValue >= 180 && rawValue < 260:
+            self = .south
+        default:
+            self = .west
         }
     }
 }

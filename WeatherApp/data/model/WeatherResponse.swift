@@ -34,6 +34,7 @@ class WeatherResponse: Decodable {
                 self.message = try container.decode(String.self, forKey: $0)
             default:
                 if let weatherItem = try? container.decode(Weather.self, forKey: $0) {
+                    weatherItem.date = DateUtils.getDate(from: $0.stringValue)
                     self.weatherList.append(weatherItem)
                 }
             }
