@@ -18,18 +18,40 @@ class WeatherItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var windSpeedLabel: UILabel!
     
     func configureCell(_ model: HomeModel) {
-//        self.tempLabel.text = "\(temperature)°C"
-//        self.hourLabel.text = hour + "h"
-//        self.humidityLabel.text = "\(humidity.prefix(4))%"
-//        self.windSpeedLabel.text = windDirection
-//        self.windLabel.text = "\(windValue)km/h"
-//        switch status {
-//        case .cloudy:
-//            weatherImageView.image = #imageLiteral(resourceName: "cloud")
-//        case .sunny:
-//            weatherImageView.image = #imageLiteral(resourceName: "contrast")
-//        case .rainy:
-//            weatherImageView.image = #imageLiteral(resourceName: "rain")
-//        }
+
+        if let rainLevel = model.rain {
+            switch rainLevel {
+            case .clear:
+               weatherImageView.image = #imageLiteral(resourceName: "contrast")
+            case .littleRainy:
+                weatherImageView.image = #imageLiteral(resourceName: "cloud")
+            case .rainy:
+                weatherImageView.image = #imageLiteral(resourceName: "rain")
+            }
+        }
+        if let windDirection = model.windDirection {
+            switch windDirection {
+            case .east:
+                self.windSpeedLabel.text = NSLocalizedString("East", comment: "")
+            case .north:
+                self.windSpeedLabel.text = NSLocalizedString("North", comment: "")
+            case .south:
+                self.windSpeedLabel.text = NSLocalizedString("South", comment: "")
+            case .west:
+                self.windSpeedLabel.text = NSLocalizedString("West", comment: "")
+            }
+        }
+        if let tempurature = model.temperature {
+            self.tempLabel.text = "\(tempurature)°C"
+        }
+        if let windAvg = model.avgWind {
+            windLabel.text = "\(windAvg) km/h"
+        }
+        if let humidity = model.humidity {
+            humidityLabel.text = "\(humidity) %"
+        }
+        if let hour = model.hour {
+            hourLabel.text = "\(hour)"
+        }
     }
 }

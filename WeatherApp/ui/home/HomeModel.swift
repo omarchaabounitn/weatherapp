@@ -14,6 +14,7 @@ struct HomeModel {
     let avgWind: Int?
     let windDirection: WindDirection?
     let rain: RainLevel?
+    let hour: Int?
     let errorMessage: String?
     
     init(temperature: Int? = nil,
@@ -21,6 +22,7 @@ struct HomeModel {
          avgWind: Int? = nil,
          windDirection: WindDirection? = nil,
          rain: RainLevel? = nil,
+         hour: Int? = nil,
          errorMessage: String? = nil) {
         self.temperature = temperature
         self.humidity = humidity
@@ -28,5 +30,6 @@ struct HomeModel {
         self.windDirection = windDirection
         self.rain = rain
         self.errorMessage = errorMessage
+        self.hour = hour
     }
 }

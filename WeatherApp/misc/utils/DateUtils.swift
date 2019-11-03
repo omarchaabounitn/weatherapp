@@ -16,4 +16,8 @@ class DateUtils: NSObject {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter.date(from: stringDate) ?? Date()
     }
+    
+    static func getComponant(componant: Calendar.Component ,fromDate date: Date) -> Int {
+        return Calendar.current.component(componant, from: date)
+    }
 }

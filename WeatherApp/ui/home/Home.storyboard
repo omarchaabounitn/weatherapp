@@ -30,8 +30,8 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clearSky" translatesAutoresizingMaskIntoConstraints="NO" id="Lh7-bG-lbz">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bi8-aP-b7m">
-                                                <rect key="frame" x="143.5" y="129" width="88" height="75.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bi8-aP-b7m">
+                                                <rect key="frame" x="174" y="129" width="27.5" height="75.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="63"/>
                                                 <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                                 <nil key="highlightedColor"/>
@@ -49,8 +49,8 @@
                                                                     <constraint firstAttribute="width" constant="25" id="PMi-Gh-aV0"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 km/h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xja-4q-fUz">
-                                                                <rect key="frame" x="57" y="7" width="63.5" height="21.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xja-4q-fUz">
+                                                                <rect key="frame" x="57" y="7" width="8.5" height="21.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <nil key="highlightedColor"/>
@@ -74,7 +74,7 @@
                                                                     <constraint firstAttribute="height" constant="25" id="v5h-0m-bKf"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkd-jI-f0Y">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkd-jI-f0Y">
                                                                 <rect key="frame" x="53" y="7" width="41.5" height="21.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
@@ -101,8 +101,8 @@
                                                                     <constraint firstAttribute="width" constant="25" id="118-NN-shN"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="East" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9af-cz-2Li">
-                                                                <rect key="frame" x="53" y="7" width="35" height="21.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9af-cz-2Li">
+                                                                <rect key="frame" x="53" y="7" width="8.5" height="21.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <nil key="highlightedColor"/>
@@ -168,6 +168,9 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="n2I-B5-n7E"/>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LpA-6Y-KNw">
+                                <rect key="frame" x="169" y="325" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -175,6 +178,7 @@
                             <constraint firstItem="xJt-Fc-adF" firstAttribute="width" secondItem="hqi-yh-P2l" secondAttribute="width" id="2Cl-QL-O82"/>
                             <constraint firstItem="AJD-8h-3kY" firstAttribute="leading" secondItem="lfQ-To-dFq" secondAttribute="leading" id="3Cy-xR-Inw"/>
                             <constraint firstItem="lfQ-To-dFq" firstAttribute="bottom" secondItem="AJD-8h-3kY" secondAttribute="bottom" id="6h1-wv-gtH"/>
+                            <constraint firstItem="LpA-6Y-KNw" firstAttribute="centerY" secondItem="lfQ-To-dFq" secondAttribute="centerY" id="FFn-Pi-Bik"/>
                             <constraint firstItem="xJt-Fc-adF" firstAttribute="height" secondItem="hqi-yh-P2l" secondAttribute="height" multiplier="0.5" id="Gzo-Vf-f0n"/>
                             <constraint firstItem="AJD-8h-3kY" firstAttribute="trailing" secondItem="lfQ-To-dFq" secondAttribute="trailing" id="H4K-ER-dCy"/>
                             <constraint firstItem="PzH-HE-gwv" firstAttribute="top" secondItem="hqi-yh-P2l" secondAttribute="top" id="Lln-j0-6ek"/>
@@ -182,13 +186,17 @@
                             <constraint firstItem="jmI-16-zNS" firstAttribute="height" secondItem="hqi-yh-P2l" secondAttribute="height" multiplier="0.5" id="nfS-RW-DiS"/>
                             <constraint firstItem="PzH-HE-gwv" firstAttribute="leading" secondItem="lfQ-To-dFq" secondAttribute="leading" id="vfh-b8-CKU"/>
                             <constraint firstAttribute="bottom" secondItem="PzH-HE-gwv" secondAttribute="bottom" id="w1x-eR-g7K"/>
+                            <constraint firstItem="LpA-6Y-KNw" firstAttribute="centerX" secondItem="lfQ-To-dFq" secondAttribute="centerX" id="wd5-i4-6Kp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lfQ-To-dFq"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="LpA-6Y-KNw" id="NDr-wB-Txa"/>
                         <outlet property="collectionView" destination="jmI-16-zNS" id="vqm-JL-NqP"/>
                         <outlet property="currentTempLabel" destination="Bi8-aP-b7m" id="ECh-AS-ZTR"/>
                         <outlet property="humidityLabel" destination="Kkd-jI-f0Y" id="Uw7-Ze-W9X"/>
+                        <outlet property="scrollView" destination="AJD-8h-3kY" id="au7-Pp-d4q"/>
+                        <outlet property="todayImageView" destination="Lh7-bG-lbz" id="f3N-Ad-BLL"/>
                         <outlet property="windDirectionLabl" destination="9af-cz-2Li" id="Lci-G9-dcd"/>
                         <outlet property="windLabel" destination="xja-4q-fUz" id="rYN-Lw-keV"/>
                     </connections>
