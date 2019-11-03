@@ -28,11 +28,11 @@ class HomeViewModel: NSObject {
     
     // Properties
     var resultSubject: PublishSubject<ResultState> = PublishSubject<ResultState>()
-    var dataManager: DataManager
+    var dataManager: DataManagerProtocol
     var locationManager: CLLocationManager
     var disposeBag: DisposeBag?
     
-    init(dataManager: DataManager) {
+    init(dataManager: DataManagerProtocol) {
         self.dataManager = dataManager
         self.locationManager = CLLocationManager()
         self.disposeBag = DisposeBag()
@@ -67,7 +67,7 @@ class HomeViewModel: NSObject {
             self?.resultSubject.onNext(.previsions(current: currentPrevision, nextPrivisions: previsionsList))
             
         }, onError: { [weak self] _ in
-            self?.resultSubject.onNext(.error(HomeModel(errorMessage: NSLocalizedString("Could not determinate your location. Please try again", comment: ""))))
+            self?.resultSubject.onNext(.error(HomeModel(errorMessage: NSLocalizedString("Could not fetch data. Please try again", comment: ""))))
         }).disposed(by: disposeBag!)
     }
     

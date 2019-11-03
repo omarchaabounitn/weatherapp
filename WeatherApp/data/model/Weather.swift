@@ -15,7 +15,6 @@ class Weather: Decodable {
     var humidite: Double?
     var avgWind: Double?
     var windDirection: WindDirection?
-    var cloudCoverage: Int?
     var date: Date!
     
     private enum CodingKeys: String, CodingKey {
@@ -28,8 +27,22 @@ class Weather: Decodable {
         case avgWind = "vent_moyen"
         case tenM = "10m"
         case windDirection = "vent_direction"
-        case cloudCovrage = "nebulosite"
-        case cloudCovrageKey = "totale"
+    }
+    
+    init( temperature: Double?,
+          pression: Int?,
+          pluie: Double,
+          humidite: Double?,
+          avgWind: Double?,
+          windDirection: Int,
+          date: Date) {
+        self.temperature = temperature
+        self.pression = pression
+        self.pluie = RainLevel(rawValue: pluie)
+        self.humidite = humidite
+        self.avgWind = avgWind
+        self.windDirection = WindDirection(rawValue: windDirection)
+        self.date = date
     }
     
     required init(from decoder: Decoder) throws {
@@ -49,9 +62,6 @@ class Weather: Decodable {
         }
         if let windDirectionContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: CodingKeys.windDirection) {
             self.windDirection = WindDirection(rawValue: try windDirectionContainer.decode(Int.self, forKey: .tenM))
-        }
-        if let cloudContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: CodingKeys.cloudCovrage) {
-            self.cloudCoverage = try cloudContainer.decode(Int.self, forKey: .cloudCovrageKey)
         }
     }
 }
