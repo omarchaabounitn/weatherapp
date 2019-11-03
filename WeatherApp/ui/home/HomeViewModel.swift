@@ -31,11 +31,14 @@ class HomeViewModel: NSObject {
     var dataManager: DataManagerProtocol
     var locationManager: CLLocationManager
     var disposeBag: DisposeBag?
+    let navigator: NavigatorProtocol
+    private var weatherList = [Weather]()
     
-    init(dataManager: DataManagerProtocol) {
+    init(dataManager: DataManagerProtocol, navigator: NavigatorProtocol) {
         self.dataManager = dataManager
         self.locationManager = CLLocationManager()
         self.disposeBag = DisposeBag()
+        self.navigator = navigator
     }
     
     func onDidAppear() {
@@ -59,16 +62,25 @@ class HomeViewModel: NSObject {
     func getLocation(_ longitude: Double, latitude: Double) {
         self.resultSubject.onNext(.loading)
         self.dataManager.getProvisions(latitude, longitude).subscribe(onSuccess: { [weak self] previsions in
-            var previsionsList = previsions.sorted(by: { $0.date < $1.date }).compactMap {
+            self?.weatherList = Array(previsions.sorted(by: { $0.date < $1.date }).prefix(8))
+            var previsionsList = self?.weatherList.compactMap {
                 HomeModel(temperature: Int(($0.temperature ?? 0) - 273.15), humidity: Int($0.humidite ?? 0), avgWind: Int($0.avgWind ?? 0), windDirection: $0.windDirection, rain: $0.pluie, hour: DateUtils.getComponant(componant: .hour, fromDate: $0.date), errorMessage: nil)
+            } ?? []
+            if self?.weatherList.isEmpty == true {
+                self?.resultSubject.onNext(.error(HomeModel(errorMessage: NSLocalizedString("No data found. Please try again", comment: ""))))
+                return
             }
-            previsionsList = Array(previsionsList.prefix(7))
+            _ = self?.weatherList.remove(at: 0)
             let currentPrevision = previsionsList.remove(at: 0)
             self?.resultSubject.onNext(.previsions(current: currentPrevision, nextPrivisions: previsionsList))
             
         }, onError: { [weak self] _ in
             self?.resultSubject.onNext(.error(HomeModel(errorMessage: NSLocalizedString("Could not fetch data. Please try again", comment: ""))))
         }).disposed(by: disposeBag!)
+    }
+    
+    func onItemSelected(_ index: Int) {
+        navigator.goToDetails(weatherList[index])
     }
     
     deinit {

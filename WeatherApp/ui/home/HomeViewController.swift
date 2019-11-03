@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     var disposeBag: DisposeBag? = DisposeBag()
     
     lazy var viewModel: HomeViewModel = {
-        HomeViewModel(dataManager: DataManager())
+        HomeViewModel(dataManager: DataManager(), navigator: Navigator(self))
     }()
     
     override func viewDidLoad() {
@@ -54,8 +54,9 @@ class HomeViewController: UIViewController {
             }
             switch result {
             case .loading:
-                self?.activityIndicator.startAnimating()
-                
+                DispatchQueue.main.async {
+                    self?.activityIndicator.startAnimating()
+                }
             case .error(let model):
                 DispatchQueue.main.async {
                     self?.showError(model.errorMessage)
@@ -141,6 +142,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         cell.configureCell(dataSource[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.onItemSelected(indexPath.item)
     }
 }
 
